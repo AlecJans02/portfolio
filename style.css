@@ -1,0 +1,136 @@
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+main {
+  position: absolute;
+  width: 100wv;
+  z-index: 99;
+  margin: 0px auto;
+  padding: 120px 0px;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}
+
+h1 {
+  font-family: evelon, sans-serif;
+  font-weight: 700;
+}
+
+header {
+  grid-column: 2 / span 2;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  background-color: black;
+  margin-bottom: 200px;
+  background-color: rgba(225, 225, 225, 0.24);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  border: 1px solid rgba(225, 225, 225, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  padding-left: 30px;
+  color: white;
+}
+
+section {
+  grid-column: 2 / span 8;
+  padding: 1rem;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  margin-bottom: 200px;
+  background-color: rgba(225, 225, 225, 0.24);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  border: 1px solid rgba(225, 225, 225, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  padding-left: 30px;
+  padding-right: 30px;
+  color: white;
+}
+
+p {
+  font-family: evelon, sans-serif;
+  font-weight: 600;
+}
+
+li {
+  font-weight: bold;
+  font-family: evelon, sans-serif;
+}
+
+.projectInfo {
+  width: 70%;
+}
+
+img {
+  height: 200px;
+  width: 300px;
+}
+
+.projectPicture {
+  height: 220px;
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  float: right;
+}
+
+.projectCard {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 15%;
+}
+
+.repo {
+  height: 50px;
+  width: 200px;
+  background-color: blue;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  font-family: evelon, sans-serif;
+  font-size: large;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.liveApp {
+  height: 50px;
+  width: 200px;
+  background-color: blue;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  font-family: evelon, sans-serif;
+  font-size: large;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.projectIMG {
+  height: 50px;
+  width: 50px;
+}
+
+.builtWith {
+  display: flex;
+  align-items: center;
+  font-family: evelon, sans-serif;
+  font-size: large;
+  font-weight: bold;
+}
+
