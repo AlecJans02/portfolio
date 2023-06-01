@@ -1,5 +1,5 @@
 import './style.css'
-import * as THREE from './js/three.module.js';
+import * as THREE from './three.module.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import test from './space.webp';
 import reactpng from './reactlogo.png';
