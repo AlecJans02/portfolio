@@ -5,6 +5,17 @@ export default defineConfig({
   build: {
     rollupOptions: {
       external: ['three']
+    },
+    optimizeDeps: {
+      include: ['portfolio/main.js']
+    },
+    server: {
+      compress: false,
+    },
+    resolve: {
+      alias: {
+        three: 'three/build/three.module.js',
+      }
     }
   }
 });

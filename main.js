@@ -1,7 +1,9 @@
 import './style.css'
 import * as THREE from 'three';
+//import * as THREE from '/node_modules/three/build/three.module.js';
+//import { OrbitControls } from '/node_modules/three/examples/jsm/controls/OrbitControls';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import test from './space.webp';
+//import test from './space.webp';
 import reactpng from './reactlogo.png';
 import javascriptpng from './javascript.png';
 import csharppng from './cshaprlogo.jpg';
@@ -83,7 +85,7 @@ Array(100).fill().forEach(addStar);
 Array(100).fill().forEach(addStarTwo);
 Array(100).fill().forEach(addStarThree);
 
-const spaceTexture = new THREE.TextureLoader().load(test);
+//const spaceTexture = new THREE.TextureLoader().load(test);
 //scene.background = spaceTexture;
 
 const reactTexture = new THREE.TextureLoader().load(reactpng);
@@ -303,3 +305,6 @@ const exhaustWeb = document.getElementById("exhaustWeb");
 
 exhaustWeb.addEventListener("click", exhaustWebfunction);
 
+window.onresize = () => {
+  location.reload();
+};
