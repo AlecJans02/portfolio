@@ -25,9 +25,9 @@ camera.position.setZ(30);
 
 renderer.render ( scene, camera );
 
-const geometry = new THREE.TorusGeometry( 10, 3, 16, 100);
-const material = new THREE.MeshStandardMaterial( { color: 0xFF6347 });
-const torus = new THREE.Mesh( geometry, material );
+ const geometry = new THREE.TorusGeometry( 10, 3, 16, 100);
+ const material = new THREE.MeshStandardMaterial( { color: 0xFF6347 });
+ const torus = new THREE.Mesh( geometry, material );
 
 //scene.add(torus);
 
@@ -48,42 +48,155 @@ const gridHelper = new THREE.GridHelper(200,50);
 
 const controls = new OrbitControls(camera, renderer.domElement);
 
-function addStar() {
-  const geometry = new THREE.SphereGeometry(0.3, 44, 44);
-  const material = new THREE.MeshStandardMaterial( { color: "#EEEEEE" });
-  const star = new THREE.Mesh( geometry, material );
 
-  const [x, y, z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread( 100 ) );
+// particle background
+const newmaterial = new THREE.PointsMaterial({
+  size: 0.015
+})
+//newmaterial.color = new THREE.Color(0xffffff)
 
-  star.position.set(x, y, z);
-  scene.add(star);  
+
+//test above
+
+const particlesGeometry = new THREE.BufferGeometry;
+const particlesCnt = 5000;
+
+const posArray = new Float32Array(particlesCnt * 3);
+
+for(let i = 0; i < particlesCnt * 3; i++) {
+  posArray[i] = (Math.random() - 0.5) * 40;
 }
 
-function addStarTwo() {
-  const geometry = new THREE.SphereGeometry(0.3, 44, 44);
-  const material = new THREE.MeshStandardMaterial( { color: "#47D2E9" });
-  const star = new THREE.Mesh( geometry, material );
+particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
 
-  const [x, y, z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread( 100 ) );
+//const sphere = new THREE.Points(geometry, newmaterial);
+//const particlesMesh = new THREE.Points(particlesGeometry, newmaterial);
+const particlesMesh = new THREE.Points(particlesGeometry, newmaterial);
+scene.add(particlesMesh);
 
-  star.position.set(x, y, z);
-  scene.add(star);  
+// test below
+
+document.addEventListener('mousemove', animateParticles);
+
+let mouseX = 0;
+let mouseY = 0;
+
+function animateParticles(event) {
+  mouseY = event.clientY;
+  mouseX = event.clientX;
 }
 
-function addStarThree() {
-  const geometry = new THREE.SphereGeometry(0.3, 44, 44);
-  const material = new THREE.MeshStandardMaterial( { color: "#53DF83" });
-  const star = new THREE.Mesh( geometry, material );
+const clock = new THREE.Clock()
 
-  const [x, y, z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread( 100 ) );
+const tick = () =>
+{
 
-  star.position.set(x, y, z);
-  scene.add(star);  
+    const elapsedTime = clock.getElapsedTime()
+
+    // Update objects
+    //sphere.rotation.y = .5 * elapsedTime
+    particlesMesh.rotation.x = mouseY * (elapsedTime * 0.00008)
+    particlesMesh.rotation.y = mouseX * (elapsedTime * 0.00008)
+    // Update Orbital Controls
+    // controls.update()
+
+    // Render
+    renderer.render(scene, camera)
+
+    // Call tick again on the next frame
+    window.requestAnimationFrame(tick)
 }
 
-Array(100).fill().forEach(addStar);
-Array(100).fill().forEach(addStarTwo);
-Array(100).fill().forEach(addStarThree);
+tick()
+// let starIndex = 0;
+// let starIndexTwo = 0;
+// let starIndexThree = 0;
+
+// function addStar() {
+//   const geometry = new THREE.SphereGeometry(0.3, 44, 44);
+//   const material = new THREE.MeshStandardMaterial( { color: "#EEEEEE" });
+//   const star = new THREE.Mesh( geometry, material );
+//   const separation = 5; // Separation between star objects (adjust as desired)
+//   const index = starIndex; // Index of the current star object
+
+//   // Calculate the x position based on the index and separation
+//   const posX = index * separation;
+//   star.position.set(posX, 0, 0);
+//   star.name = 'star';
+
+//   //const [x, y, z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread( 100 ) );
+//   //document.addEventListener('mousemove', updateStarPosition);
+//   //star.position.set(x, y, z);
+//   scene.add(star);  
+//   starIndex++;
+// }
+
+// function addStarTwo() {
+//   const geometry = new THREE.SphereGeometry(0.6, 84, 84);
+//   const material = new THREE.MeshStandardMaterial( { color: "#47D2E9" });
+//   const star = new THREE.Mesh( geometry, material );
+//   const separation = 10; // Separation between star objects (adjust as desired)
+//   const index = starIndexTwo; // Index of the current star object
+
+//   // Calculate the x position based on the index and separation
+//   const posX = index * separation;
+//   star.position.set(posX, 0, 0);
+//   star.name = 'star';
+
+//   //const [x, y, z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread( 100 ) );
+//   //document.addEventListener('mousemove', updateStarPosition);
+//   //star.position.set(x, y, z);
+//   scene.add(star);  
+//   starIndexTwo++;
+// }
+
+// function addStarThree() {
+//   const geometry = new THREE.SphereGeometry(0.6, 84, 84);
+//   const material = new THREE.MeshStandardMaterial( { color: "#53DF83" });
+//   const star = new THREE.Mesh( geometry, material );
+//   const separation = 15; // Separation between star objects (adjust as desired)
+//   const index = starIndexThree; // Index of the current star object
+
+//   // Calculate the x position based on the index and separation
+//   const posX = index * separation;
+//   star.position.set(posX, 0, 0);
+//   star.name = 'star';
+
+//   //const [x, y, z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread( 100 ) );
+//   //document.addEventListener('mousemove', updateStarPosition);
+//   //star.position.set(x, y, z);
+//   scene.add(star);  
+//   starIndexThree++;
+// }
+
+// Array(10).fill().forEach(addStar);
+// Array(10).fill().forEach(addStarTwo);
+// Array(10).fill().forEach(addStarThree);
+
+// document.addEventListener('mousemove', updateStarPosition);
+
+// function updateStarPosition(event) {
+//   const mouseX = event.clientX;
+//   const mouseY = event.clientY;
+
+//   // Convert mouse coordinates to normalized device coordinates (-1 to 1)
+//   const mouseNormalizedX = (mouseX / window.innerWidth) * 2 - 1;
+//   const mouseNormalizedY = -(mouseY / window.innerHeight) * 2 + 1;
+
+//   // Update the position of each star based on the index and separation
+//   scene.traverse((child) => {
+//     if (child.isMesh && child.name === 'star') {
+//       const separation = child.geometry.parameters.radius * 2; // Separation between star objects (based on sphere radius)
+//       const index = child.position.x / separation; // Index of the current star object
+
+//       // Calculate the new x position based on the index and separation
+//       const posX = index * separation;
+
+//       // Set the star position based on the new x position and the cursor coordinates
+//       child.position.set(posX + mouseNormalizedX, mouseNormalizedY, 0);
+//     }
+//   });
+// }
 
 //const spaceTexture = new THREE.TextureLoader().load(test);
 //scene.background = spaceTexture;
@@ -189,9 +302,9 @@ function moveCamera() {
   html.rotation.y += 0.01;
   html.rotation.z += 0.01;
 
-  //camera.position.z = t * 0.01;
-  camera.position.x = t * 0.002;
-  camera.position.y = t * 0.002;
+  //camera.position.z = t * 0.01; originally stopped
+  //camera.position.x = t * 0.002; stopped for v2
+  //camera.position.y = t * 0.002; stopped for v2
 }
 
 document.body.onscroll = moveCamera;
@@ -205,9 +318,14 @@ function animate() {
 
   controls.update();
   renderer.render( scene,camera );
+
+  //added below for cursor follow
+  //document.removeEventListener('mousemove', updateStarPosition);
 }
 
 animate();
+
+//document.addEventListener('mousemove', updateStarPosition);
 
 const exhaustfunction = () => {
   window.open("https://github.com/AlecJans02/Performance-Exhaust-Website");
